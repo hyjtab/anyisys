@@ -9,8 +9,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^0.2.7",
     "axios": "^0.26.0",
     "core-js": "^3.8.3",
+    "element-plus": "^2.0.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
@@ -34,11 +36,22 @@
     "eslint-plugin-vue": "^8.0.3",
     "husky": "^7.0.1",
     "sass": "^1.32.7",
-    "sass-loader": "^12.0.0"
+    "sass-loader": "^12.0.0",
+    "unplugin-auto-import": "^0.6.1",
+    "unplugin-vue-components": "^0.17.20"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "resolutions": {
+    "@vueuse/**/vue-demi": "0.11.4"
   }
 }
