@@ -2,9 +2,9 @@
   <div class="div-form">
     <h1 style="margin-bottom: 10px">安疫系统登录界面</h1>
     <el-form ref="ruleFormRef" :model="form" :rules="rules" class="form">
-      <el-form-item prop="accont" class="accont_form">
+      <el-form-item prop="username" class="username_form">
         <el-input
-          v-model="form.account"
+          v-model="form.username"
           placeholder="Please input your account number"
           :prefix-icon="Avatar"
           clearable
@@ -28,14 +28,15 @@
 </template>
 
 <script setup>
+import { login } from '@/api/login'
 import { ref, reactive } from 'vue'
 import { Avatar, Lock } from '@element-plus/icons-vue'
 const form = ref({
-  accont: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 const rules = reactive({
-  accont: [
+  username: [
     {
       required: true,
       message: 'Please input Activity name',
@@ -52,9 +53,11 @@ const rules = reactive({
 })
 const ruleFormRef = ref(null)
 const clickHandler = () => {
-  ruleFormRef.value.validate((valid) => {
+  ruleFormRef.value.validate(async (valid) => {
     if (valid) {
-      alert('submit!')
+      login(form.value).then((response) => {
+        console.log(response)
+      })
     } else {
       console.log('error submit!!')
       return false
@@ -82,7 +85,7 @@ body {
 .button_form {
   width: 100%;
 }
-.accont_form {
+.username_form {
   width: 100%;
   margin-bottom: 20px;
 }
